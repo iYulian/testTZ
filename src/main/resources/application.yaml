@@ -1,0 +1,18 @@
+server:
+  port: 8081
+spring:
+  jpa:
+    database: h2
+    properties:
+      hibernate:
+        default_schema: PUBLIC
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+  liquibase:
+    default-schema: PUBLIC
+    change-log: db/changelog/db.changelog-master.yaml
+    enabled: true
+    drop-first: false
+  application:
+    name: practic-app

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="insert-init-data-0" author="Yulian">
+        <insert tableName="account">
+            <column name="id" value="A0EEBC99-9C0B-4EF8-BB6D-6BB9BD380A21"/>
+            <column name="amount" valueNumeric="1000.00"/>
+            <column name="beneficiary_name" value="Vitaliy"/>
+            <column name="pin" value="$2a$10$XuWj8m6jDKrD5NyGycjTJeIToIvh936bL4xSFNX6tJZbwXO/ri3vy"/>
+        </insert>
+        
+        <insert tableName="account_audit">
+            <column name="id" value="A0EEBC99-9C0B-4EF8-BB6D-6BB9BD380A12"/>
+            <column name="operation_type" value="Create"/>
+            <column name="new_account_json" value="{beneficiary_name&quot;:&quot;Vitaliy&quot;,&quot;pin&quot;:&quot;$2a$10$XuWj8m6jDKrD5NyGycjTJeIToIvh936bL4xSFNX6tJZbwXO/ri3vy&quot;,&quot;amount&quot;:1000.00,&quot;}"/>
+            <column name="changed_account_id" value="A0EEBC99-9C0B-4EF8-BB6D-6BB9BD380A21"/>
+            <column name="modified_at" valueDate="2023-10-21 17:18:10.000000"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

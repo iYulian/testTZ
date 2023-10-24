@@ -1,0 +1,72 @@
+Account Service
+RESTful API для управления банковскими счетами.
+Описание сервиса
+Этот проект представляет собой пример реализации RESTful API для управления банковскими счетами, включая создание счетов, внесение денег, снятие денег и перевод средств между счетами. API взаимодействует с бэкенд-сервисом, который использует встроенную базу данных для хранения данных о счетах.
+
+Используемые технологии
+    Java 17
+    Spring Boot
+    H2 databases
+    Liquibase
+    Lombok
+    Mockito
+    JUnit
+    OpenAPI (Swagger)
+
+Функциональности
+    Управление: Создание и просмотр банковских счетов.
+    Пополнение: Пополнение баланса банковского счета.
+    Снятие: Снятие средств с банковского счета.
+    Перевод: Перевод средств между счетами.
+
+API-endpoints
+Документация Swagger по ссылке -
+
+
+Получение информации о всех счетах - http://localhost:8081/accounts , ответ представляет json вид:
+    {
+        "beneficiaryName": "Vitaliy",
+        "amount": 1000.00
+    }
+
+
+Получение о всех операциях производимых - со счетом http://localhost:8081/accounts/transactions/{id}, ответ представляет json вид
+    {
+        "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12",
+        "operationType": "Create",
+        "newAccountJson": "{beneficiary_name\":\"Vitaliy\",\"pin\":\"$2a$10$XuWj8m6jDKrD5NyGycjTJeIToIvh936bL4xSFNX6tJZbwXO/ri3vy\",\"amount\":1000.00,\"}",
+        "modifiedAt": "2023-10-21T17:18:10",
+        "changedAccountId": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a21"
+    }
+    Передаваемый id должен иметь вид UUID, в ответ можно получить статус 404 с сообщением что счет с таким id е существует или что с ним не проводились изменения.
+
+Добавление счета - http://localhost:8081/accounts:
+    {
+        "id": null,
+        "pin": 1234,
+        "beneficiaryName": "Sergey",
+        "amount": 12.23
+    }
+
+
+Пополнения счета - http://localhost:8081/accounts/deposit:
+    {
+        "accountIdTo": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a21",
+        "amount": 11.00,
+        "pin": 1234
+    }
+
+Снятие денег со счета - http://localhost:8081/accounts/withdraw:
+    {
+        "accountIdFrom": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a21",
+        "amount": 11.00,
+        "pin": 1234
+    }
+
+Трансфер между счетами - http://localhost:8081/accounts/transfer:
+    {
+        "accountIdFrom": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a21",
+        "accountIdTo": "d54ac1b8-098d-4385-b377-d8b4a0c7c153",
+        "amount": 777,
+        "pin": "1234"
+    }
